@@ -1,0 +1,3 @@
+lark>=1.1.9
+duckdb>=1.0.0  # for testing/transpiling
+pytest         # optional for tests
