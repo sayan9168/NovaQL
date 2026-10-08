@@ -1,36 +1,62 @@
-# 🚀 NovaQL (Next-Gen Query Language)
+# NovaQL
 
-**NovaQL** is a high-level, pipelined query language designed to be more intuitive and powerful than standard SQL. It focuses on readability, modularity, and automation.
+### Next-gen pipelined query language — cleaner than nested SQL
 
-## ✨ Why NovaQL?
+Readable pipelines · Smart joins · Implicit grouping · Compiles to SQL
 
-SQL often becomes messy with deeply nested subqueries and repetitive `JOIN` statements. NovaQL simplifies data manipulation by using a **pipe-based (`|`) architecture**, similar to modern data processing frameworks.
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)](https://www.python.org/)
+[![Parser](https://img.shields.io/badge/Parser-Lark-green)](https://github.com/lark-parser/lark)
 
-### Key Features:
-- **Pipelined Syntax:** Data flows from top to bottom, making logic easy to follow.
-- **Smart Joins:** Automatically detects and handles relationships based on dot notation (e.g., `customers.name` auto-joins the customers table).
-- **Implicit Grouping:** No more repetitive column listing in `GROUP BY`.
-- **Cleaner Filters:** Uses intuitive operators like `==` for comparisons.
+> Write queries top-to-bottom with `|` pipes instead of deeply nested SQL.
 
 ---
 
-## 🛠️ Comparison: SQL vs. NovaQL
+## Why NovaQL?
 
-### Standard SQL
+SQL gets messy with nested subqueries and repetitive `JOIN` / `GROUP BY` boilerplate.  
+NovaQL uses a **pipeline architecture** so data flows clearly from stage to stage.
+
+### Highlights
+
+- **Pipelined syntax** — logic reads top → bottom
+- **Smart joins** — dot notation can drive relationship handling (e.g. `customers.name`)
+- **Implicit grouping** — less repetitive column listing
+- **Intuitive filters** — operators like `==`
+
+---
+
+## SQL vs NovaQL
+
+**SQL**
 ```sql
-SELECT orders.id, customers.name, orders.amount 
-FROM orders 
-JOIN customers ON orders.customer_id = customers.id 
+SELECT orders.id, customers.name, orders.amount
+FROM orders
+JOIN customers ON orders.customer_id = customers.id
 WHERE customers.city = 'Dhaka';
-NovaQL (Much Cleaner!)
+```
+
+**NovaQL**
+```text
 from orders
 | select orders.id, customers.name, orders.amount
 | filter customers.city == "Dhaka"
-🚀 Getting Started
-NovaQL is built using the Lark parsing toolkit in Python.
-Prerequisites
+```
+
+---
+
+## Install
+
+```bash
 pip install lark
-Basic Usage
+git clone https://github.com/sayan9168/NovaQL.git
+cd NovaQL
+```
+
+---
+
+## Basic usage
+
+```python
 from novaql import parser, NovaQLCompiler
 
 query = """
@@ -42,9 +68,20 @@ from sales
 tree = parser.parse(query)
 sql_output = NovaQLCompiler().transform(tree)
 print(sql_output)
-🏗️ Project Structure
-grammar.lark: The core grammar definitions.
-compiler.py: The Transformer logic that converts NovaQL to optimized SQL.
-tests/: Sample queries and test cases.
-👤 Author
-Developed by Sayan.
+```
+
+---
+
+## Project structure
+
+```text
+grammar.lark   # Core grammar
+compiler.py    # NovaQL → SQL transformer
+tests/         # Sample queries
+```
+
+---
+
+## Author
+
+[Sayan Mahata](https://github.com/sayan9168)
